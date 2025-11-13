@@ -8,14 +8,14 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Vazirmatn -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
-  <!-- MathJax برای فرمول‌های ریاضی -->
+  <!-- MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   
-  <!-- Favicon (اختیاری) -->
+  <!-- Favicon -->
   <link rel="icon" href="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" type="image/jpeg">
   
   <style>
@@ -23,22 +23,12 @@
     .logo-orbit { animation: orbit 30s linear infinite; }
     @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .glow { text-shadow: 0 0 20px rgba(251, 146, 60, 0.7); }
-    .particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: #fff;
-      border-radius: 50%;
-      animation: float 6s infinite ease-in-out;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
-      50% { transform: translateY(-30px) translateX(15px); opacity: 1; }
-    }
+    .particle { position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%; animation: float 6s infinite ease-in-out; }
+    @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; } 50% { transform: translateY(-30px) translateX(15px); opacity: 1; } }
     .smooth-scroll { scroll-behavior: smooth; }
-    #mobile-menu { transition: transform 0.4s ease; }
+    #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
     .article-card { transition: all 0.3s ease; }
-    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(251, 146, 60, 0.15); }
+    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(251的值, 146, 60, 0.15); }
     .chart { height: 300px; background: #111; border-radius: 12px; margin: 1rem 0; display: flex; align-items: center; justify-content: center; color: #fb923c; font-weight: bold; }
   </style>
 </head>
@@ -58,45 +48,42 @@
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-xl font-bold text-orange-500 glow">اسمارجس</div>
       <ul class="hidden md:flex space-x-reverse space-x-8 text-sm">
-        <li><a href="#home" class="hover:text-orange-400 transition">خانه</a></li>
         <li><a href="#about" class="hover:text-orange-400 transition">درباره ما</a></li>
         <li><a href="#articles" class="hover:text-orange-400 transition">مقالات</a></li>
         <li><a href="#social" class="hover:text-orange-400 transition">فضای مجازی</a></li>
-        <li><a href="#contact" class="hover:text-orange-400 transition">تماس</a></li>
+        <li><a href="#contact" class="hover:text-orange-400 transition">ارتباط با ما</a></li>
       </ul>
       <button id="menu-btn" class="md:hidden text-white text-2xl">منو</button>
     </nav>
   </header>
 
-  <!-- منوی موبایل -->
+  <!-- منوی موبایل (کاملاً کار می‌کنه!) -->
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-black/95 backdrop-blur-xl transform translate-x-full z-50 shadow-2xl">
     <div class="p-6">
-      <button id="close-menu" class="text-white text-2xl mb-8 float-left">بستن</button>
-      <ul class="space-y-6 text-lg clear-both">
-        <li><a href="#home" class="block hover:text-orange-400">خانه</a></li>
-        <li><a href="#about" class="block hover:text-orange-400">درباره ما</a></li>
-        <li><a href="#articles" class="block hover:text-orange-400">مقالات</a></li>
-        <li><a href="#social" class="block hover:text-orange-400">فضای مجازی</a></li>
-        <li><a href="#contact" class="block hover:text-orange-400">تماس</a></li>
+      <button id="close-menu" class="text-white text-2xl mb-8">بستن</button>
+      <ul class="space-y-6 text-lg">
+        <li><a href="#about" class="block hover:text-orange-400 transition">درباره ما</a></li>
+        <li><a href="#articles" class="block hover:text-orange-400 transition">مقالات</a></li>
+        <li><a href="#social" class="block hover:text-orange-400 transition">فضای مجازی</a></li>
+        <li><a href="#contact" class="block hover:text-orange-400 transition">ارتباط با ما</a></li>
       </ul>
     </div>
   </div>
 
-  <!-- خانه -->
-  <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
-    <div class="text-center z-10 px-6">
+  <!-- صفحه اصلی (فقط توضیح اسمارجس) -->
+  <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6">
+    <div class="text-center z-10 max-w-3xl">
       <div class="relative inline-block">
         <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit">
         <div class="absolute inset-0 rounded-full border-2 border-dashed border-orange-400 animate-ping"></div>
       </div>
       <h1 class="text-5xl md:text-7xl font-bold mt-8 text-orange-500 glow">اسمارجس</h1>
-      <p class="mt-4 text-lg md:text-xl text-blue-200">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
-      <p class="mt-2 text-sm md:text-base text-gray-300 max-w-2xl mx-auto">
-        تحقیق در تمامی علوم | تمرکز ویژه بر <span class="text-orange-400 font-bold">فیزیک هسته‌ای کیهانی</span>
+      <p class="mt-6 text-lg md:text-xl text-blue-200">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
+      <p class="mt-4 text-base md:text-lg text-gray-300 leading-relaxed">
+        گروه تحقیقاتی <strong class="text-orange-400">اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.  
+        ما در <strong>تمام حوزه‌های علمی</strong> فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> — از پرتوهای کیهانی تا شتاب‌دهنده‌های طبیعی — تخصص اصلی ماست.
       </p>
-      <a href="#articles" class="mt-8 inline-block px-8 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full transition transform hover:scale-105">
-        مقالات علمی
-      </a>
+      <p class="mt-4 italic text-orange-300">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
     </div>
   </section>
 
@@ -106,7 +93,6 @@
       <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">درباره اسمارجس</h2>
       <div class="grid md:grid-cols-2 gap-10 items-center">
         <div class="space-y-6">
-          <!-- سعدی اسفندیار -->
           <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-6 rounded-xl border border-orange-700/50">
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">س</span></div>
@@ -117,7 +103,6 @@
               </div>
             </div>
           </div>
-          <!-- یاسین امانی -->
           <div class="bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-6 rounded-xl border border-orange-700/50">
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">ی</span></div>
@@ -130,130 +115,37 @@
           </div>
         </div>
         <div class="text-gray-200 leading-relaxed space-y-4">
-          <p class="text-lg">گروه تحقیقاتی <span class="text-orange-400 font-bold">اسمارجس</span> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.</p>
-          <p>ما در <strong>تمام حوزه‌های علمی</strong> فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> — از پرتوهای کیهانی تا شتاب‌دهنده‌های طبیعی — قلب تپنده‌ی تحقیقات ماست.</p>
-          <p class="italic text-orange-300">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
+          <p>ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.</p>
+          <p>مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- مقالات علمی (کامل!) -->
+  <!-- مقالات -->
   <section id="articles" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
     <div class="container mx-auto max-w-6xl">
       <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">مقالات علمی</h2>
-
-      <!-- مقاله ۱: پرتوهای کیهانی -->
-      <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-12">
+      <!-- مقاله ۱ -->
+      <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
         <h3 class="text-2xl font-bold text-orange-400 mb-4">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
-        <p class="text-sm text-gray-400 mb-6">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
-        <div class="prose prose-invert max-w-none text-gray-300 space-y-6">
-
-          <h4 class="text-xl font-bold text-orange-300">مقدمه</h4>
-          <p>پرتوهای کیهانی (Cosmic Rays) ذراتی با انرژی بسیار بالا هستند که از اعماق فضا به زمین می‌رسند. این ذرات عمدتاً پروتون هستند و انرژی آن‌ها می‌تواند تا \(10^{20}\) eV برسد — بیش از یک میلیون برابر انرژی ذرات در شتاب‌دهنده LHC!</p>
-
-          <h4 class="text-xl font-bold text-orange-300">منشأ پرتوهای کیهانی</h4>
-          <p>منابع احتمالی:</p>
-          <ul class="list-disc list-inside space-y-2">
-            <li>ابرنواخترها (Supernovae)</li>
-            <li>سیاه‌چاله‌های دوتایی</li>
-            <li>هسته‌های فعال کهکشانی (AGN)</li>
-            <li>انفجارهای پرتو گاما (GRB)</li>
-          </ul>
-
-          <h4 class="text-xl font-bold text-orange-300">طیف انرژی</h4>
-          <p>طیف انرژی پرتوهای کیهانی به صورت توانی است:</p>
-          <p class="text-center my-6 text-lg">\[
-          \frac{dN}{dE} \propto E^{-\gamma}, \quad \gamma \approx 2.7
-          \]</p>
-          <p>در انرژی‌های بالا (\(E > 10^{18}\) eV)، اثر <strong>GZK</strong> باعث کاهش شار می‌شود.</p>
-
-          <h4 class="text-xl font-bold text-orange-300">روش تحقیق</h4>
-          <p>ما از داده‌های رصدخانه <strong>Pierre Auger</strong> استفاده کردیم. این رصدخانه با بیش از ۱۶۰۰ آشکارساز، بارش‌های گسترده هوایی (EAS) را ثبت می‌کند.</p>
-
-          <h4 class="text-xl font-bold text-orange-300">نتایج</h4>
-          <p>تحلیل ۱۰ سال داده نشان داد که پرتوهای با انرژی بالای \(10^{19}\) eV از جهت کهکشان‌های فعال می‌آیند.</p>
-
-          <div class="chart">نمودار: توزیع انرژی پرتوهای کیهانی (E > 10¹⁸ eV)</div>
-
-          <h4 class="text-xl font-bold text-orange-300">نتیجه‌گیری</h4>
-          <p>پرتوهای کیهانی نه تنها منشأ کیهانی دارند، بلکه می‌توانند به درک فیزیک فراتر از مدل استاندارد کمک کنند.</p>
-
-          <p class="text-sm text-gray-400 mt-6">منبع: Pierre Auger Collaboration, 2023</p>
-        </div>
-        <a href="#" class="inline-block mt-6 text-orange-400 hover:text-orange-300 transition">دانلود PDF</a>
+        <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
+        <p class="text-gray-300">پرتوهای کیهانی ذراتی با انرژی تا \(10^{20}\) eV هستند که از اعماق فضا می‌آیند...</p>
+        <a href="#" class="inline-block mt-4 text-orange-400 hover:text-orange-300 transition">ادامه مطلب</a>
       </div>
-
-      <!-- مقاله ۲: نوترینوها -->
-      <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-12">
+      <!-- مقاله ۲ -->
+      <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
         <h3 class="text-2xl font-bold text-orange-400 mb-4">نوترینوها: ذرات شبح‌مانند کیهان</h3>
-        <p class="text-sm text-gray-400 mb-6">نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵</p>
-        <div class="prose prose-invert max-w-none text-gray-300 space-y-6">
-
-          <h4 class="text-xl font-bold text-orange-300">مقدمه</h4>
-          <p>نوترینوها ذراتی با جرم بسیار کم و بدون بار الکتریکی هستند. هر ثانیه میلیاردها نوترینو از خورشید از بدن شما عبور می‌کنند!</p>
-
-          <h4 class="text-xl font-bold text-orange-300">نوسان نوترینو</h4>
-          <p>نوترینوها در حین حرکت بین سه طعم نوسان می‌کنند:</p>
-          <p class="text-center my-6 text-lg">\[
-          \nu_e \leftrightarrow \nu_\mu \leftrightarrow \nu_\tau
-          \]</p>
-
-          <h4 class="text-xl font-bold text-orange-300">نوترینوهای کیهانی</h4>
-          <p>نوترینوهای پرانرژی از:</p>
-          <ul class="list-disc list-inside space-y-2">
-            <li>پرتوهای کیهانی برخورد با جو</li>
-            <li>مرکز کهکشان راه شیری</li>
-            <li>منابع فراکهکشانی</li>
-          </ul>
-
-          <h4 class="text-xl font-bold text-orange-300">روش تحقیق</h4>
-          <p>رصدخانه <strong>IceCube</strong> در قطب جنوب با ۵۱۶۰ حسگر نوری، نوترینوهای پرانرژی را شناسایی می‌کند.</p>
-
-          <h4 class="text-xl font-bold text-orange-300">نتایج</h4>
-          <p>اولین نوترینو فراکهکشانی در سال ۲۰۱۳ شناسایی شد. انرژی آن: \(2 \times 10^{15}\) eV</p>
-
-          <div class="chart">نمودار: مسیر نوترینوهای شناسایی‌شده در IceCube</div>
-
-          <h4 class="text-xl font-bold text-orange-300">نتیجه‌گیری</h4>
-          <p>نوترینوها پنجره‌ای جدید به کیهان باز می‌کنند و می‌توانند منشأ پرتوهای کیهانی را روشن کنند.</p>
-
-          <p class="text-sm text-gray-400 mt-6">منبع: IceCube Collaboration, 2024</p>
-        </div>
-        <a href="#" class="inline-block mt-6 text-orange-400 hover:text-orange-300 transition">دانلود PDF</a>
+        <p class="text-sm text-gray-400 mb-4">نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵</p>
+        <p class="text-gray-300">نوترینوها با ماده به سختی برهم‌کنش می‌کنند و هر ثانیه میلیاردها از بدن شما عبور می‌کنند...</p>
+        <a href="#" class="inline-block mt-4 text-orange-400 hover:text-orange-300 transition">ادامه مطلب</a>
       </div>
-
-      <!-- مقاله ۳: شتاب‌دهنده‌های طبیعی -->
+      <!-- مقاله ۳ -->
       <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl">
         <h3 class="text-2xl font-bold text-orange-400 mb-4">شتاب‌دهنده‌های طبیعی کیهان</h3>
-        <p class="text-sm text-gray-400 mb-6">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰</p>
-        <div class="prose prose-invert max-w-none text-gray-300 space-y-6">
-
-          <h4 class="text-xl font-bold text-orange-300">مقدمه</h4>
-          <p>جهان خود بزرگ‌ترین شتاب‌دهنده ذرات است. منابع کیهانی ذرات را تا \(10^{20}\) eV شتاب می‌دهند.</p>
-
-          <h4 class="text-xl font-bold text-orange-300">مکانیسم شتاب‌دهی</h4>
-          <p>مهم‌ترین مکانیسم: <strong>شتاب‌دهی فرمی</strong></p>
-          <p>ذرات بین امواج شوک در بقایای ابرنواخترها گیر می‌افتند و انرژی کسب می‌کنند.</p>
-
-          <h4 class="text-xl font-bold text-orange-300">رصدخانه‌های زمینی</h4>
-          <ul class="list-disc list-inside space-y-2">
-            <li>Pierre Auger Observatory (آرژانتین)</li>
-            <li>Telescope Array (آمریکا)</li>
-            <li>CTA (آینده)</li>
-          </ul>
-
-          <h4 class="text-xl font-bold text-orange-300">نتایج</h4>
-          <p>تحلیل داده‌ها نشان داد که شتاب‌دهی در بقایای ابرنواخترها تا \(10^{17}\) eV مؤثر است.</p>
-
-          <div class="chart">نمودار: مقایسه انرژی شتاب‌دهنده‌های زمینی و کیهانی</div>
-
-          <h4 class="text-xl font-bold text-orange-300">نتیجه‌گیری</h4>
-          <p>شتاب‌دهنده‌های طبیعی نقش کلیدی در تولید پرتوهای کیهانی دارند.</p>
-
-          <p class="text-sm text-gray-400 mt-6">منبع: Fermi, 1949; Auger, 2023</p>
-        </div>
-        <a href="#" class="inline-block mt-6 text-orange-400 hover:text-orange-300 transition">دانلود PDF</a>
+        <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰</p>
+        <p class="text-gray-300">جهان خود بزرگ‌ترین شتاب‌دهنده ذرات است...</p>
+        <a href="#" class="inline-block mt-4 text-orange-400 hover:text-orange-300 transition">ادامه مطلب</a>
       </div>
     </div>
   </section>
@@ -268,7 +160,7 @@
           <div class="text-right"><p class="font-bold">روبیکا</p><p class="text-xs opacity-80">Rubika.ir/smarges</p></div>
         </a>
         <a href="https://eitaa.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s47.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
           <div class="text-right"><p class="font-bold">ایتا</p><p class="text-xs opacity-80">Eitaa.com/smarges</p></div>
         </a>
         <a href="https://instagram.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
@@ -279,10 +171,10 @@
     </div>
   </section>
 
-  <!-- فرم تماس -->
+  <!-- ارتباط با ما -->
   <section id="contact" class="py-20 px-6">
     <div class="container mx-auto max-w-2xl">
-      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">تماس با ما</h2>
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">ارتباط با ما</h2>
       <form id="contact-form" class="bg-black/60 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 space-y-6">
         <input type="text" placeholder="نام شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
         <input type="email" placeholder="ایمیل شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
@@ -298,10 +190,9 @@
   <!-- فوتر -->
   <footer class="bg-black/80 py-8 text-center text-sm text-gray-500 border-t border-blue-900">
     <p>© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است</p>
-    <p class="mt-2">طراحی شده با برای آینده علم</p>
   </footer>
 
-  <!-- جاوااسکریپت -->
+  <!-- جاوااسکریپت (منو + فرم + اسکرول) -->
   <script>
     // منوی موبایل
     const menuBtn = document.getElementById('menu-btn');
@@ -318,14 +209,20 @@
       mobileMenu.classList.add('translate-x-full');
     });
 
+    // بستن منو با کلیک روی لینک
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+      });
+    });
+
     // اسکرول نرم
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({ behavior: 'smooth' });
-        if (mobileMenu.classList.contains('translate-x-0')) {
-          mobileMenu.classList.add('translate-x-full');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
