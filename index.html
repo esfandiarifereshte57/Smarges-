@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<html lang="ع" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,14 +20,42 @@
   <link rel="icon" href="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" type="image/jpeg">
   
   <style>
-    html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; font-family: 'Vazirmatn', sans-serif; }
+    /* رفع سیاه بودن سمت راست */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    
     .logo-orbit { animation: orbit 30s linear infinite; }
     @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .glow { text-shadow: 0 0 20px rgba(251, 146, 60, 0.7); }
-    .particle { position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%; animation: float 6s infinite ease-in-out; pointer-events: none; }
-    @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; } 50% { transform: translateY(-30px) translateX(15px); opacity: 1; } }
-    #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
-    #mobile-menu.open { transform: translateX(0); }
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+      50% { transform: translateY(-30px) translateX(15px); opacity: 1; }
+    }
+    .smooth-scroll { scroll-behavior: smooth; }
+    
+    /* منوی موبایل */
+    #mobile-menu {
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(100%);
+    }
+    #mobile-menu.open {
+      transform: translateX(0);
+    }
+    
     .article-card { transition: all 0.3s ease; }
     .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(251, 146, 60, 0.15); }
     .chart { height: 300px; background: #111; border-radius: 12px; margin: 1rem 0; display: flex; align-items: center; justify-content: center; color: #fb923c; font-weight: bold; }
@@ -36,25 +65,8 @@
 </head>
 <body class="bg-gradient-to-b from-black via-blue-950 to-black text-white min-h-screen">
 
-  <!-- صفحه ورود اجباری -->
-  <div id="login-screen" class="min-h-screen flex items-center justify-center px-6">
-    <div class="bg-black/70 backdrop-blur-lg p-10 rounded-2xl border border-orange-800/50 max-w-md w-full text-center shadow-2xl">
-      <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگو" class="w-32 mx-auto rounded-full border-4 border-orange-500/50 mb-6">
-      <h1 class="text-3xl font-bold text-orange-500 glow mb-2">Smarges</h1>
-      <p class="text-gray-300 mb-8">برای ورود، نام کاربری انتخاب کنید</p>
-      <div class="flex justify-center mb-6">
-        <div class="text-6xl cursor-pointer" id="avatar-display" onclick="changeAvatar()">User</div>
-      </div>
-      <input type="text" id="username-input" placeholder="نام کاربری (مثال: سعدی)" class="w-full px-4 py-3 bg-white/10 border border-gray-700 rounded-lg text-white text-center focus:border-orange-500 focus:outline-none transition mb-4">
-      <button onclick="login()" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition transform hover:scale-105">
-        ورود به Smarges
-      </button>
-      <p class="text-xs text-gray-500 mt-4">حساب شما برای همیشه ذخیره می‌شود</p>
-    </div>
-  </div>
-
   <!-- ذرات پس‌زمینه -->
-  <div id="particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden">
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     <div class="particle" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
     <div class="particle" style="top: 50%; left: 75%; animation-delay: 1.5s;"></div>
     <div class="particle" style="top: 70%; left: 25%; animation-delay: 3s;"></div>
@@ -63,7 +75,7 @@
   </div>
 
   <!-- هدر -->
-  <header id="header" class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/80 border-b border-orange-900/50 hidden">
+  <header class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/80 border-b border-orange-900/50">
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="text-xl font-bold text-orange-500 glow">اسمارجس</div>
       <ul class="hidden md:flex space-x-reverse space-x-8 text-sm">
@@ -76,8 +88,8 @@
     </nav>
   </header>
 
-  <!-- منوی موبایل -->
-  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white text-black transform transition-transform duration-400 z-50 shadow-2xl hidden">
+  <!-- منوی موبایل (سفید و بدون سیاه) -->
+  <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white text-black transform transition-transform duration-400 z-50 shadow-2xl">
     <div class="p-6">
       <button id="close-menu" class="text-black text-2xl mb-8">بستن</button>
       <ul class="space-y-6 text-lg">
@@ -89,166 +101,186 @@
     </div>
   </div>
 
-  <!-- محتوا اصلی -->
-  <div id="main-content" class="hidden">
-    <!-- صفحه اصلی -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6">
-      <div class="text-center z-10 max-w-3xl">
-        <div class="relative inline-block">
-          <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit">
-          <div class="absolute inset-0 rounded-full border-2 border-dashed border-orange-400 animate-ping"></div>
-        </div>
-        <h1 class="text-5xl md:text-7xl font-bold mt-8 text-orange-500 glow">اسمارجس</h1>
-        <p class="mt-6 text-lg md:text-xl text-blue-200">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
-        <p class="mt-4 text-base md:text-lg text-gray-300 leading-relaxed">
-          گروه تحقیقاتی <strong class="text-orange-400">اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.  
-          ما در تمام حوزه‌های علمی فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> تخصص اصلی ماست.
-        </p>
-        <p class="mt-4 italic text-orange-300">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
+  <!-- صفحه اصلی -->
+  <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6">
+    <div class="text-center z-10 max-w-3xl">
+      <div class="relative inline-block">
+        <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit">
+        <div class="absolute inset-0 rounded-full border-2 border-dashed border-orange-400 animate-ping"></div>
       </div>
-    </section>
+      <h1 class="text-5xl md:text-7xl font-bold mt-8 text-orange-500 glow">اسمارجس</h1>
+      <p class="mt-6 text-lg md:text-xl text-blue-200">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
+      <p class="mt-4 text-base md:text-lg text-gray-300 leading-relaxed">
+        گروه تحقیقاتی <strong class="text-orange-400">اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.  
+        ما در تمام حوزه‌های علمی فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> تخصص اصلی ماست.
+      </p>
+      <p class="mt-4 italic text-orange-300">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
+    </div>
+  </section>
 
-    <!-- درباره ما -->
-    <section id="about" class="py-20 px-6">
-      <div class="container mx-auto max-w-5xl">
-        <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">درباره اسمارجس</h2>
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div class="space-y-6">
-            <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-6 rounded-xl border border-orange-700/50">
-              <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">س</span></div>
-                <div>
-                  <p class="font-bold text-orange-400 text-lg">سعدی اسفندیار</p>
-                  <p class="text-sm text-gray-300">مدیر علمی</p>
-                  <p class="text-xs text-gray-400 mt-1">متخصص فیزیک هسته‌ای کیهانی</p>
-                </div>
-              </div>
-            </div>
-            <div class="bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-6 rounded-xl border border-orange-700/50">
-              <div class="flex items-center gap-4">
-                <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">ی</span></div>
-                <div>
-                  <p class="font-bold text-orange-400 text-lg">یاسین امانی</p>
-                  <p class="text-sm text-gray-300">هماهنگ‌کننده پروژه‌ها</p>
-                  <p class="text-xs text-gray-400 mt-1">متخصص فیزیک کوانتومی</p>
-                </div>
+  <!-- درباره ما -->
+  <section id="about" class="py-20 px-6">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">درباره اسمارجس</h2>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-6 rounded-xl border border-orange-700/50">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">س</span></div>
+              <div>
+                <p class="font-bold text-orange-400 text-lg">سعدی اسفندیار</p>
+                <p class="text-sm text-gray-300">مدیر علمی</p>
+                <p class="text-xs text-gray-400 mt-1">متخصص فیزیک هسته‌ای کیهانی</p>
               </div>
             </div>
           </div>
-          <div class="text-gray-200 leading-relaxed space-y-4">
-            <p>ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.</p>
-            <p>مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.</p>
+          <div class="bg-gradient-to-r from-purple-900/50 to-pink-900/50 p-6 rounded-xl border border-orange-700/50">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">ی</span></div>
+              <div>
+                <p class=" Goldsmith text-orange-400 text-lg">یاسین امانی</p>
+                <p class="text-sm text-gray-300">هماهنگ‌کننده پروژه‌ها</p>
+                <p class="text-xs text-gray-400 mt-1">متخصص فیزیک کوانتومی</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- مقالات -->
-    <section id="articles" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
-      <div class="container mx-auto max-w-6xl">
-        <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">مقالات علمی</h2>
-        <div id="articles-list">
-          <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
-            <h3 class="text-2xl font-bold text-orange-400 mb-4">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
-            <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
-            <p class="text-gray-300">پرتوهای کیهانی ذراتی با انرژی تا \(10^{20}\) eV هستند...</p>
-            <button onclick="showFullArticle(1)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
-          </div>
-          <!-- بقیه مقالات... -->
-        </div>
-        <div id="full-article-container" class="hidden mt-12">
-          <button onclick="backToList()" class="mb-6 text-orange-400 hover:text-orange-300 transition font-medium">بازگشت به لیست</button>
-          <div id="full-article-content" class="bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl"></div>
+        <div class="text-gray-200 leading-relaxed space-y-4">
+          <p>ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.</p>
+          <p>مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- فضای مجازی -->
-    <section id="social" class="py-20 px-6 bg-black/60">
-      <div class="container mx-auto text-center">
-        <h2 class="text-4xl font-bold text-orange-500 glow mb-12">ما در فضای مجازی</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <a href="https://rubika.ir/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            <div class="text-right"><p class="font-bold">روبیکا</p><p class="text-xs opacity-80">Rubika.ir/smarges</p></div>
-          </a>
-          <a href="https://eitaa.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-            <div class="text-right"><p class="font-bold">ایتا</p><p class="text-xs opacity-80">Eitaa.com/smarges</p></div>
-          </a>
-          <a href="https://instagram.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            <div class="text-right"><p class="font-bold">اینستاگرام</p><p class="text-xs opacity-80">@smarges</p></div>
-          </a>
+  <!-- مقالات -->
+  <section id="articles" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">مقالات علمی</h2>
+
+      <!-- لیست مقالات -->
+      <div id="articles-list">
+        <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
+          <h3 class="text-2xl font-bold text-orange-400 mb-4">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
+          <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
+          <p class="text-gray-300">پرتوهای کیهانی ذراتی با انرژی تا \(10^{20}\) eV هستند...</p>
+          <button onclick="showFullArticle(1)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
+        </div>
+        <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
+          <h3 class="text-2xl font-bold text-orange-400 mb-4">نوترینوها: ذرات شبح‌مانند کیهان</h3>
+          <p class="text-sm text-gray-400 mb-4">نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵</p>
+          <p class="text-gray-300">نوترینوها با ماده به سختی برهم‌کنش می‌کنند...</p>
+          <button onclick="showFullArticle(2)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
+        </div>
+        <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl">
+          <h3 class="text-2xl font-bold text-orange-400 mb-4">شتاب‌دهنده‌های طبیعی کیهان</h3>
+          <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰</p>
+          <p class="text-gray-300">جهان خود بزرگ‌ترین شتاب‌دهنده است...</p>
+          <button onclick="showFullArticle(3)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
         </div>
       </div>
-    </section>
 
-    <!-- ارتباط با ما، فوتر، پنل مدیریت -->
-    <!-- (همه وجود دارند، فقط برای صرفه‌جویی حذف شدند) -->
+      <!-- مقاله کامل -->
+      <div id="full-article-container" class="hidden mt-12">
+        <button onclick="backToList()" class="mb-6 text-orange-400 hover:text-orange-300 transition font-medium">بازگشت به لیست</button>
+        <div id="full-article-content" class="bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl"></div>
+      </div>
+    </div>
+  </section>
 
+  <!-- فضای مجازی -->
+  <section id="social" class="py-20 px-6 bg-black/60">
+    <div class="container mx-auto text-center">
+      <h2 class="text-4xl font-bold text-orange-500 glow mb-12">ما در فضای مجازی</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <a href="https://rubika.ir/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          <div class="text-right"><p class="font-bold">روبیکا</p><p class="text-xs opacity-80">Rubika.ir/smarges</p></div>
+        </a>
+        <a href="https://eitaa.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <div class="text-right"><p class="font-bold">ایتا</p><p class="text-xs opacity-80">Eitaa.com/smarges</p></div>
+        </a>
+        <a href="https://instagram.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <div class="text-right"><p class="font-bold">اینستاگرام</p><p class="text-xs opacity-80">@smarges</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ارتباط با ما -->
+  <section id="contact" class="py-20 px-6">
+    <div class="container mx-auto max-w-2xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">ارتباط با ما</h2>
+      <form id="contact-form" class="bg-black/60 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 space-y-6">
+        <input type="text" placeholder="نام شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
+        <input type="email" placeholder="ایمیل شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
+        <textarea placeholder="پیام شما" rows="5" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition"></textarea>
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition transform hover:scale-105">
+          ارسال پیام
+        </button>
+        <p id="form-status" class="text-center text-sm mt-4"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- فوتر + دکمه پنل مدیریت -->
+  <footer class="bg-black/80 py-8 text-center text-sm text-gray-500 border-t border-blue-900">
+    <p>© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است</p>
+    <p class="mt-2">طراحی شده با برای آینده علم</p>
+    
+    <!-- دکمه پنل مدیریت -->
+    <button onclick="openAdminPanel()" class="mt-6 px-6 py-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full font-bold transition transform hover:scale-105 admin-btn">
+      پنل مدیریت
+    </button>
+  </footer>
+
+  <!-- پنل مدیریت (مودال) -->
+  <div id="admin-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-6">
+    <div class="bg-black/80 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 max-w-4xl w-full max-h-screen overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-orange-500 glow">پنل مدیریت اسمارجس</h2>
+        <button onclick="closeAdminPanel()" class="text-white text-2xl">بستن</button>
+      </div>
+
+      <!-- ورود با رمز -->
+      <div id="admin-login" class="space-y-4">
+        <input type="password" id="admin-password" placeholder="رمز عبور را وارد کنید" class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
+        <button id="admin-login-btn" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition">
+          ورود به پنل
+        </button>
+        <p id="admin-error" class="text-red-400 text-center text-sm"></p>
+      </div>
+
+      <!-- پنل اصلی -->
+      <div id="admin-dashboard" class="hidden space-y-8">
+        <p class="text-green-400 text-center">ورود موفقیت‌آمیز بود!</p>
+        <div class="bg-black/60 p-6 rounded-xl border border-orange-700/50">
+          <h3 class="text-xl font-bold text-orange-400 mb-4">افزودن مقاله جدید</h3>
+          <input type="text" id="new-title" placeholder="عنوان مقاله" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg">
+          <textarea id="new-content" placeholder="محتوای کامل مقاله (با LaTeX)" rows="6" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg"></textarea>
+          <button onclick="addArticle()" class="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg">افزودن مقاله</button>
+        </div>
+        <div id="articles-list-admin" class="space-y-3"></div>
+      </div>
+    </div>
   </div>
 
-  <!-- اسکریپت کامل -->
+  <!-- جاوااسکریپت -->
   <script>
-    // === سیستم حساب کاربری ===
-    const AVATARS = ['User', 'Man', 'Woman', 'Scientist', 'Engineer', 'Student', 'Researcher', 'Admin'];
-    let selectedAvatar = 'User';
-    let user = { username: '', avatar: '', id: '', joinDate: 0 };
-
-    function uid() { return Date.now().toString(36) + Math.random().toString(36).substr(2); }
-
-    function saveUser() {
-      const data = JSON.stringify(user);
-      const now = Date.now();
-      const keys = ['smarges_user', 'smarges_backup1', 'smarges_backup2', 'smarges_id_' + user.id, 'smarges_name_' + user.username, 'smarges_ts_' + now];
-      keys.forEach(k => localStorage.setItem(k, data));
-      ['s1','s2','s3'].forEach(s => sessionStorage.setItem('smarges_' + s, data));
-    }
-
-    function loadUser() {
-      const sources = [localStorage.getItem('smarges_user'), localStorage.getItem('smarges_backup1'), sessionStorage.getItem('smarges_s1')];
-      for (let data of sources) {
-        if (data) {
-          try { user = JSON.parse(data); saveUser(); return true; } catch(e) {}
-        }
-      }
-      return false;
-    }
-
-    function changeAvatar() {
-      selectedAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
-      document.getElementById('avatar-display').textContent = selectedAvatar;
-    }
-
-    function login() {
-      const username = document.getElementById('username-input').value.trim();
-      if (!username || username.length < 2) { alert('نام کاربری حداقل ۲ حرف'); return; }
-
-      const existing = localStorage.getItem('smarges_name_' + username);
-      if (existing) { user = JSON.parse(existing); }
-      else { user = { username, avatar: selectedAvatar, id: uid(), joinDate: Date.now() }; saveUser(); }
-
-      document.getElementById('login-screen').classList.add('hidden');
-      document.getElementById('header').classList.remove('hidden');
-      document.getElementById('main-content').classList.remove('hidden');
-      document.getElementById('particles').classList.remove('hidden');
-    }
-
-    window.onload = () => { if (loadUser() && user.username) login(); };
-    setInterval(() => { if (user.username) saveUser(); }, 5000);
-
-    // === کد اصلی منو، اسکرول، مقالات، پنل مدیریت ===
+    // منوی موبایل
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMenu = document.getElementById('close-menu');
 
-    menuBtn?.addEventListener('click', () => mobileMenu.classList.add('open'));
-    closeMenu?.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+    closeMenu.addEventListener('click', () => mobileMenu.classList.remove('open'));
     document.querySelectorAll('#mobile-menu a').forEach(link => {
       link.addEventListener('click', () => mobileMenu.classList.remove('open'));
     });
 
+    // اسکرول نرم
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -257,8 +289,92 @@
       });
     });
 
-    // فرم تماس، مقالات، پنل مدیریت (همان کد اصلی)
-    // (همه وجود دارند)
+    // فرم تماس
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const status = document.getElementById('form-status');
+      status.textContent = 'پیام شما با موفقیت ارسال شد!';
+      status.className = 'text-green-400';
+      setTimeout(() => { status.textContent = ''; this.reset(); }, 3000);
+    });
+
+    // نمایش مقاله کامل
+    function showFullArticle(id) {
+      const container = document.getElementById('full-article-container');
+      const content = document.getElementById('full-article-content');
+      const list = document.getElementById('articles-list');
+      let html = '';
+      if (id === 1) {
+        html = `<h3 class="text-2xl font-bold text-orange-400 mb-6">پرتوهای کیهانی</h3><p class="text-sm text-gray-400 mb-6">نویسنده: سعدی اسفندیار</p><div class="prose prose-invert text-gray-300 space-y-4"><p>پرتوهای کیهانی ذراتی با انرژی بسیار بالا هستند...</p><p class="text-center">\\[\frac{dN}{dE} \propto E^{-2.7}\\]</p><div class="chart">نمودار: طیف انرژی</div></div>`;
+      }
+      content.innerHTML = html;
+      list.classList.add('hidden');
+      container.classList.remove('hidden');
+      container.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function backToList() {
+      document.getElementById('articles-list').classList.remove('hidden');
+      document.getElementById('full-article-container').classList.add('hidden');
+    }
+
+    // پنل مدیریت
+    const ADMIN_PASSWORD = 'smargessaadiandyasin';
+
+    function openAdminPanel() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+      document.getElementById('admin-password').value = '';
+      document.getElementById('admin-error').textContent = '';
+    }
+
+    function closeAdminPanel() {
+      document.getElementById('admin-modal').classList.add('hidden');
+      document.getElementById('admin-login').classList.remove('hidden');
+      document.getElementById('admin-dashboard').classList.add('hidden');
+    }
+
+    // دکمه ورود به پنل
+    document.getElementById('admin-login-btn').addEventListener('click', function() {
+      const input = document.getElementById('admin-password').value.trim();
+      const error = document.getElementById('admin-error');
+      
+      if (input === ADMIN_PASSWORD) {
+        document.getElementById('admin-login').classList.add('hidden');
+        document.getElementById('admin-dashboard').classList.remove('hidden');
+        error.textContent = '';
+        loadAdminArticles();
+      } else {
+        error.textContent = 'رمز عبور اشتباه است!';
+      }
+    });
+
+    // مدیریت مقالات
+    function loadAdminArticles() {
+      const articles = JSON.parse(localStorage.getItem('smarges_articles') || '[]');
+      const list = document.getElementById('articles-list-admin');
+      list.innerHTML = '';
+      articles.forEach((art, i) => {
+        list.innerHTML += `<div class="bg-black/60 p-4 rounded-lg mb-3"><p class="font-bold">${art.title}</p><button onclick="deleteArticle(${i})" class="text-red-400 text-sm">حذف</button></div>`;
+      });
+    }
+
+    function addArticle() {
+      const title = document.getElementById('new-title').value;
+      const content = document.getElementById('new-content').value;
+      if (!title || !content) return alert('عنوان و محتوا الزامی است');
+      const articles = JSON.parse(localStorage.getItem('smarges_articles') || '[]');
+      articles.push({ title, content });
+      localStorage.setItem('smarges_articles', JSON.stringify(articles));
+      document.getElementById('new-title').value = '';
+      document.getElementById('new-content').value = '';
+      loadAdminArticles();
+      alert('مقاله اضافه شد!');
+    }
+
+    function deleteArticle(index) {
+      const articles = JSON.parse(localStorage.getItem('smarges_articles') || '[]');
+      articles.splice(index, 1);
+      localStorage.setItem('smarges_articles', JSON.stringify(articles));
+      loadAdminArticles();
+    }
   </script>
-</body>
-</html>
