@@ -199,7 +199,7 @@
 
   <!-- فوتر + دکمه پنل مدیریت -->
   <footer class="bg-black/80 py-8 text-center text-sm text-gray-500 border-t border-blue-900">
-    <p>© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است</p>
+    <p>© ۲۰۲۵ اسمارجس | همه حقوق محفوظ است</p>
     <p class="mt-2">طراحی شده با برای آینده علم</p>
     
     <!-- دکمه پنل مدیریت -->
@@ -208,13 +208,30 @@
     </button>
   </footer>
 
-  <!-- پنل مدیریت (مودال) -->
-  <div id="admin-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-6">
-    <div class="bg-black/80 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 max-w-4xl w-full max-h-screen overflow-y-auto">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-orange-500 glow">پنل مدیریت اسمارجس</h2>
-        <button onclick="closeAdminPanel()" class="text-white text-2xl">بستن</button>
-      </div>
+  <!-- پنل مدیریت (مودال) --><!-- پنل مدیریت (مودال) -->
+<div id="admin-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-6">
+  <div class="bg-black/80 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 max-w-4xl w-full max-h-screen overflow-y-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-orange-500 glow">پنل مدیریت اسمارجس</h2>
+      <button onclick="closeAdminPanel()" class="text-white text-2xl">بستن</button>
+    </div>
+
+    <!-- ورود با رمز -->
+    <div id="admin-login" class="space-y-4">
+      <input type="password" id="admin-password" placeholder="رمز عبور را وارد کنید" class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
+      <button id="admin-login-btn" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition">
+        ورود به پنل
+      </button>
+      <p id="admin-error" class="text-red-400 text-center text-sm"></p>
+    </div>
+
+    <!-- پنل اصلی -->
+    <div id="admin-dashboard" class="hidden space-y-8">
+      <p class="text-green-400 text-center">ورود موفقیت‌آمیز بود!</p>
+      <!-- اینجا بقیه پنل مدیریت -->
+    </div>
+  </div>
+</div>
 
       <!-- ورود با رمز -->
       <div id="admin-login" class="space-y-4">
