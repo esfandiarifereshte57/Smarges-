@@ -11,10 +11,6 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
-  <!-- MathJax -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -184,32 +180,6 @@
       box-shadow: 0 10px 25px rgba(251, 146, 60, 0.15);
     }
 
-    .timeline-item {
-      position: relative;
-      padding-right: 30px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 2px;
-      height: 100%;
-      background: var(--secondary);
-    }
-
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      right: -4px;
-      top: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--secondary);
-    }
-
     .stats-card {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
@@ -277,9 +247,19 @@
     .message-content {
       color: #e2e8f0;
     }
+
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .ltr {
+      direction: ltr;
+      text-align: left;
+    }
   </style>
 </head>
-<body class="dark-mode smooth-scroll">
+<body class="dark-mode smooth-scroll rtl">
 
   <!-- ذرات پس‌زمینه -->
   <div class="fixed inset-0 pointer-events-none z-0">
@@ -296,7 +276,7 @@
   <header class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/80 border-b border-orange-900/50">
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-4 space-x-reverse">
-        <div class="text-xl font-bold text-orange-500 glow">اسمارجس</div>
+        <div class="text-xl font-bold text-orange-500 glow" id="logo-text">اسمارجس</div>
         <div class="language-switcher">
           <button class="lang-btn active" data-lang="fa">فارسی</button>
           <button class="lang-btn" data-lang="en">English</button>
@@ -342,7 +322,7 @@
         <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit floating">
         <div class="absolute inset-0 rounded-full border-2 border-dashed border-orange-400 animate-ping"></div>
       </div>
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 text-orange-500 glow typewriter">اسمارجس</h1>
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 text-orange-500 glow typewriter" id="main-title">اسمارجس</h1>
       <p class="text-xl md:text-2xl mb-8 text-blue-200" data-i18n="home.subtitle">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
       <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8" data-i18n="home.description">
         گروه تحقیقاتی <strong class="text-orange-400">اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.  
@@ -474,7 +454,7 @@
         <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
           <h3 class="text-2xl font-bold text-orange-400 mb-4" data-i18n="articles.list.article1.title">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
           <p class="text-sm text-gray-400 mb-4" data-i18n="articles.list.article1.author">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
-          <p class="text-gray-300" data-i18n="articles.list.article1.summary">پرتوهای کیهانی ذراتی با انرژی تا \(10^{20}\) eV هستند که از اعماق فضا به زمین می‌رسند و اطلاعات ارزشمندی درباره فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها ارائه می‌دهند.</p>
+          <p class="text-gray-300" data-i18n="articles.list.article1.summary">پرتوهای کیهانی ذراتی با انرژی تا ۱۰^۲۰ eV هستند که از اعماق فضا به زمین می‌رسند و اطلاعات ارزشمندی درباره فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها ارائه می‌دهند.</p>
           <button onclick="showFullArticle(1)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium" data-i18n="articles.readmore">ادامه مطلب</button>
         </div>
         
@@ -862,7 +842,7 @@
         name: name,
         email: email,
         message: message,
-        date: new Date().toLocaleDateString('fa-IR'),
+        date: new Date().toLocaleDateString(currentLang === 'fa' ? 'fa-IR' : 'en-US'),
         read: false
       };
       
@@ -886,7 +866,7 @@
       const list = document.getElementById('articles-list');
       let html = '';
       if (id === 1) {
-        html = `<h3 class="text-2xl font-bold text-orange-400 mb-6">${getTranslation('articles.list.article1.title', currentLang)}</h3><p class="text-sm text-gray-400 mb-6">${getTranslation('articles.list.article1.author', currentLang)}</p><div class="prose prose-invert text-gray-300 space-y-4"><p>${getTranslation('articles.list.article1.summary', currentLang)}</p><p class="text-center">\\[\frac{dN}{dE} \propto E^{-2.7}\\]</p><div class="chart">${getTranslation('articles.chart', currentLang, 'نمودار: طیف انرژی')}</div><p>${getTranslation('articles.source', currentLang, 'منبع')}: Pierre Auger, 2023</p></div>`;
+        html = `<h3 class="text-2xl font-bold text-orange-400 mb-6">${getTranslation('articles.list.article1.title', currentLang)}</h3><p class="text-sm text-gray-400 mb-6">${getTranslation('articles.list.article1.author', currentLang)}</p><div class="prose prose-invert text-gray-300 space-y-4"><p>${getTranslation('articles.list.article1.summary', currentLang)}</p><div class="chart">${currentLang === 'fa' ? 'نمودار: طیف انرژی' : 'Chart: Energy Spectrum'}</div><p>${currentLang === 'fa' ? 'منبع' : 'Source'}: Pierre Auger, 2023</p></div>`;
       }
       content.innerHTML = html;
       list.classList.add('hidden');
@@ -907,8 +887,22 @@
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentLang = this.getAttribute('data-lang');
-        document.documentElement.lang = currentLang;
-        document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+        
+        // تغییر جهت متن
+        if (currentLang === 'fa') {
+          document.body.classList.remove('ltr');
+          document.body.classList.add('rtl');
+          document.documentElement.dir = 'rtl';
+        } else {
+          document.body.classList.remove('rtl');
+          document.body.classList.add('ltr');
+          document.documentElement.dir = 'ltr';
+        }
+        
+        // تغییر لوگو و عنوان
+        document.getElementById('logo-text').textContent = currentLang === 'fa' ? 'اسمارجس' : 'Smarges';
+        document.getElementById('main-title').textContent = currentLang === 'fa' ? 'اسمارجس' : 'Smarges';
+        
         updateContent();
       });
     });
@@ -919,7 +913,7 @@
         document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         const theme = this.getAttribute('data-theme');
-        document.body.className = `${theme}-mode smooth-scroll`;
+        document.body.className = `${theme}-mode smooth-scroll ${currentLang === 'fa' ? 'rtl' : 'ltr'}`;
       });
     });
 
@@ -1054,12 +1048,6 @@
       localStorage.setItem('smarges_social', JSON.stringify(links));
       alert(getTranslation('admin.social.saved', currentLang, 'لینک‌ها ذخیره شد!'));
     }
-
-    // اضافه کردن ترجمه‌های اضافی
-    translations.fa['articles.chart'] = 'نمودار: طیف انرژی';
-    translations.en['articles.chart'] = 'Chart: Energy Spectrum';
-    translations.fa['articles.source'] = 'منبع';
-    translations.en['articles.source'] = 'Source';
 
     // بارگذاری اولیه محتوا
     updateContent();
