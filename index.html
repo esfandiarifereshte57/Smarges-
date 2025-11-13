@@ -11,31 +11,255 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
-  <!-- MathJax -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Favicon -->
   <link rel="icon" href="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" type="image/jpeg">
   
   <style>
-    body { font-family: 'Vazirmatn', sans-serif; }
-    .logo-orbit { animation: orbit 30s linear infinite; }
-    @keyframes orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .glow { text-shadow: 0 0 20px rgba(251, 146, 60, 0.7); }
-    .particle { position: absolute; width: 3px; height: 3px; background: #fff; border-radius: 50%; animation: float 6s infinite ease-in-out; }
-    @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; } 50% { transform: translateY(-30px) translateX(15px); opacity: 1; } }
-    .smooth-scroll { scroll-behavior: smooth; }
-    #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .article-card { transition: all 0.3s ease; }
-    .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(251, 146, 60, 0.15); }
-    .full-article { display: none; }
-    .chart { height: 300px; background: #111; border-radius: 12px; margin: 1rem 0; display: flex; align-items: center; justify-content: center; color: #fb923c; font-weight: bold; }
-    .admin-btn { transition: all 0.3s ease; }
-    .admin-btn:hover { transform: scale(1.05); }
+    :root {
+      --primary: #1a237e;
+      --primary-light: #534bae;
+      --primary-dark: #000051;
+      --secondary: #ff6f00;
+      --secondary-light: #ff9e40;
+      --secondary-dark: #c43e00;
+      --text-light: #f5f5f5;
+      --text-dark: #212121;
+      --background: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    .logo-orbit { 
+      animation: orbit 30s linear infinite; 
+    }
+    
+    @keyframes orbit { 
+      from { transform: rotate(0deg); } 
+      to { transform: rotate(360deg); } 
+    }
+    
+    .glow { 
+      text-shadow: 0 0 20px rgba(251, 146, 60, 0.7); 
+    }
+    
+    .particle { 
+      position: absolute; 
+      width: 3px; 
+      height: 3px; 
+      background: #fff; 
+      border-radius: 50%; 
+      animation: float 6s infinite ease-in-out; 
+    }
+    
+    @keyframes float { 
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; } 
+      50% { transform: translateY(-30px) translateX(15px); opacity: 1; } 
+    }
+    
+    .smooth-scroll { 
+      scroll-behavior: smooth; 
+    }
+    
+    #mobile-menu { 
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    
+    .article-card { 
+      transition: all 0.3s ease; 
+    }
+    
+    .article-card:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 20px 30px rgba(251, 146, 60, 0.15); 
+    }
+    
+    .full-article { 
+      display: none; 
+    }
+    
+    .chart { 
+      height: 300px; 
+      background: #111; 
+      border-radius: 12px; 
+      margin: 1rem 0; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: #fb923c; 
+      font-weight: bold; 
+    }
+    
+    .admin-btn { 
+      transition: all 0.3s ease; 
+    }
+    
+    .admin-btn:hover { 
+      transform: scale(1.05); 
+    }
+
+    .language-switcher {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 5px;
+      display: flex;
+      gap: 5px;
+    }
+    
+    .lang-btn {
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .lang-btn.active {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .theme-switcher {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 5px;
+      display: flex;
+      gap: 5px;
+    }
+    
+    .theme-btn {
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .theme-btn.active {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .dark-mode {
+      --background: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.8);
+      --text-light: #f5f5f5;
+      --text-dark: #e2e8f0;
+    }
+
+    .light-mode {
+      --background: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --text-light: #1e293b;
+      --text-dark: #334155;
+    }
+
+    .research-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(251, 146, 60, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(251, 146, 60, 0.5);
+      box-shadow: 0 10px 25px rgba(251, 146, 60, 0.15);
+    }
+
+    .stats-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(251, 146, 60, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(251, 146, 60, 0.15);
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid var(--secondary);
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--secondary); }
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% { transform: translate(0, 0px); }
+      50% { transform: translate(0, 15px); }
+      100% { transform: translate(0, -0px); }
+    }
+
+    .message-item {
+      border-left: 3px solid #fb923c;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .message-name {
+      font-weight: bold;
+      color: #fb923c;
+    }
+
+    .message-date {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .message-content {
+      color: #e2e8f0;
+    }
+
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .ltr {
+      direction: ltr;
+      text-align: left;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-black via-blue-950 to-black text-white min-h-screen overflow-x-hidden smooth-scroll">
+<body class="dark-mode smooth-scroll rtl">
 
   <!-- ذرات پس‌زمینه -->
   <div class="fixed inset-0 pointer-events-none z-0">
@@ -44,65 +268,93 @@
     <div class="particle" style="top: 70%; left: 25%; animation-delay: 3s;"></div>
     <div class="particle" style="top: 30%; left: 85%; animation-delay: 4.5s;"></div>
     <div class="particle" style="top: 85%; left: 55%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 25%; left: 40%; animation-delay: 5s;"></div>
+    <div class="particle" style="top: 60%; left: 90%; animation-delay: 1s;"></div>
   </div>
 
   <!-- هدر -->
   <header class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/80 border-b border-orange-900/50">
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-xl font-bold text-orange-500 glow">اسمارجس</div>
+      <div class="flex items-center space-x-4 space-x-reverse">
+        <div class="text-xl font-bold text-orange-500 glow" id="logo-text">اسمارجس</div>
+        <div class="language-switcher">
+          <button class="lang-btn active" data-lang="fa">فارسی</button>
+          <button class="lang-btn" data-lang="en">English</button>
+        </div>
+        <div class="theme-switcher">
+          <button class="theme-btn active" data-theme="dark"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn" data-theme="light"><i class="fas fa-sun"></i></button>
+        </div>
+      </div>
       <ul class="hidden md:flex space-x-reverse space-x-8 text-sm">
-        <li><a href="#about" class="hover:text-orange-400 transition">درباره ما</a></li>
-        <li><a href="#articles" class="hover:text-orange-400 transition">مقالات</a></li>
-        <li><a href="#social" class="hover:text-orange-400 transition">فضای مجازی</a></li>
-        <li><a href="#contact" class="hover:text-orange-400 transition">ارتباط با ما</a></li>
+        <li><a href="#home" class="hover:text-orange-400 transition" data-translate="nav_home">خانه</a></li>
+        <li><a href="#about" class="hover:text-orange-400 transition" data-translate="nav_about">درباره ما</a></li>
+        <li><a href="#research" class="hover:text-orange-400 transition" data-translate="nav_research">تحقیقات</a></li>
+        <li><a href="#articles" class="hover:text-orange-400 transition" data-translate="nav_articles">مقالات</a></li>
+        <li><a href="#team" class="hover:text-orange-400 transition" data-translate="nav_team">تیم</a></li>
+        <li><a href="#social" class="hover:text-orange-400 transition" data-translate="nav_social">فضای مجازی</a></li>
+        <li><a href="#contact" class="hover:text-orange-400 transition" data-translate="nav_contact">ارتباط با ما</a></li>
       </ul>
-      <button id="menu-btn" class="md:hidden text-white text-2xl">منو</button>
+      <button id="menu-btn" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
     </nav>
   </header>
 
   <!-- منوی موبایل -->
   <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-black/95 backdrop-blur-xl transform translate-x-full z-50 shadow-2xl">
     <div class="p-6">
-      <button id="close-menu" class="text-white text-2xl mb-8">بستن</button>
+      <button id="close-menu" class="text-white text-2xl mb-8"><i class="fas fa-times"></i></button>
       <ul class="space-y-6 text-lg">
-        <li><a href="#about" class="block hover:text-orange-400 transition">درباره ما</a></li>
-        <li><a href="#articles" class="block hover:text-orange-400 transition">مقالات</a></li>
-        <li><a href="#social" class="block hover:text-orange-400 transition">فضای مجازی</a></li>
-        <li><a href="#contact" class="block hover:text-orange-400 transition">ارتباط با ما</a></li>
+        <li><a href="#home" class="block hover:text-orange-400 transition" data-translate="nav_home">خانه</a></li>
+        <li><a href="#about" class="block hover:text-orange-400 transition" data-translate="nav_about">درباره ما</a></li>
+        <li><a href="#research" class="block hover:text-orange-400 transition" data-translate="nav_research">تحقیقات</a></li>
+        <li><a href="#articles" class="block hover:text-orange-400 transition" data-translate="nav_articles">مقالات</a></li>
+        <li><a href="#team" class="block hover:text-orange-400 transition" data-translate="nav_team">تیم</a></li>
+        <li><a href="#social" class="block hover:text-orange-400 transition" data-translate="nav_social">فضای مجازی</a></li>
+        <li><a href="#contact" class="block hover:text-orange-400 transition" data-translate="nav_contact">ارتباط با ما</a></li>
       </ul>
     </div>
   </div>
 
   <!-- صفحه اصلی -->
   <section id="home" class="min-h-screen flex items-center justify-center relative pt-20 px-6">
-    <div class="text-center z-10 max-w-3xl">
-      <div class="relative inline-block">
-        <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit">
+    <div class="text-center z-10 max-w-4xl">
+      <div class="relative inline-block mb-8">
+        <img src="https://cdn.imgurl.ir/uploads/l469723_IMG_3895.jpeg" alt="لوگوی اسمارجس" class="w-64 md:w-96 mx-auto rounded-full shadow-2xl border-4 border-orange-500/50 logo-orbit floating">
         <div class="absolute inset-0 rounded-full border-2 border-dashed border-orange-400 animate-ping"></div>
       </div>
-      <h1 class="text-5xl md:text-7xl font-bold mt-8 text-orange-500 glow">اسمارجس</h1>
-      <p class="mt-6 text-lg md:text-xl text-blue-200">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
-      <p class="mt-4 text-base md:text-lg text-gray-300 leading-relaxed">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 text-orange-500 glow typewriter" id="main-title">اسمارجس</h1>
+      <p class="text-xl md:text-2xl mb-8 text-blue-200" data-translate="home_subtitle">گروه تحقیقاتی سعدی اسفندیار و یاسین امانی</p>
+      <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-8" data-translate="home_description">
         گروه تحقیقاتی <strong class="text-orange-400">اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد.  
         ما در تمام حوزه‌های علمی فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> تخصص اصلی ماست.
       </p>
-      <p class="mt-4 italic text-orange-300">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
+      <p class="italic text-orange-300 text-lg" data-translate="home_quote">«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»</p>
+      
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        <a href="#research" class="px-8 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full font-bold transition transform hover:scale-105 shadow-lg" data-translate="home_cta_research">
+          کشف تحقیقات
+        </a>
+        <a href="#articles" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full font-bold transition transform hover:scale-105 shadow-lg" data-translate="home_cta_articles">
+          مقالات علمی
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- درباره ما -->
   <section id="about" class="py-20 px-6">
-    <div class="container mx-auto max-w-5xl">
-      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">درباره اسمارجس</h2>
-      <div class="grid md:grid-cols-2 gap-10 items-center">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12" data-translate="about_title">درباره اسمارجس</h2>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
         <div class="space-y-6">
           <div class="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-6 rounded-xl border border-orange-700/50">
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">س</span></div>
               <div>
                 <p class="font-bold text-orange-400 text-lg">سعدی اسفندیار</p>
-                <p class="text-sm text-gray-300">مدیر علمی</p>
-                <p class="text-xs text-gray-400 mt-1">متخصص فیزیک هسته‌ای کیهانی</p>
+                <p class="text-sm text-gray-300" data-translate="about_saadi_role">مدیر علمی</p>
+                <p class="text-xs text-gray-400 mt-1" data-translate="about_saadi_specialty">متخصص فیزیک هسته‌ای کیهانی</p>
               </div>
             </div>
           </div>
@@ -110,52 +362,150 @@
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center"><span class="text-2xl">ی</span></div>
               <div>
-                <p class="font- bold text-orange-400 text-lg">یاسین امانی</p>
-                <p class="text-sm text-gray-300">هماهنگ‌کننده پروژه‌ها</p>
-                <p class="text-xs text-gray-400 mt-1">متخصص فیزیک کوانتومی</p>
+                <p class="font-bold text-orange-400 text-lg">یاسین امانی</p>
+                <p class="text-sm text-gray-300" data-translate="about_yasin_role">هماهنگ‌کننده پروژه‌ها</p>
+                <p class="text-xs text-gray-400 mt-1" data-translate="about_yasin_specialty">متخصص فیزیک کوانتومی</p>
               </div>
             </div>
           </div>
         </div>
+        
         <div class="text-gray-200 leading-relaxed space-y-4">
-          <p>ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.</p>
-          <p>مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.</p>
+          <p data-translate="about_description1">ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.</p>
+          <p data-translate="about_mission">مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.</p>
+          <p data-translate="about_description2">گروه تحقیقاتی اسمارجس با هدف پیشبرد مرزهای دانش و ارائه راهکارهای نوآورانه برای چالش‌های علمی تأسیس شده است. ما باور داریم که همکاری میان‌رشته‌ای کلید حل مسائل پیچیده در جهان امروز است.</p>
+        </div>
+      </div>
+      
+      <!-- آمار و ارقام -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+        <div class="stats-card p-6 rounded-xl text-center">
+          <div class="text-3xl font-bold text-orange-500">12+</div>
+          <div class="text-gray-300 mt-2" data-translate="stats_projects">پروژه تحقیقاتی</div>
+        </div>
+        <div class="stats-card p-6 rounded-xl text-center">
+          <div class="text-3xl font-bold text-orange-500">8+</div>
+          <div class="text-gray-300 mt-2" data-translate="stats_publications">مقاله منتشر شده</div>
+        </div>
+        <div class="stats-card p-6 rounded-xl text-center">
+          <div class="text-3xl font-bold text-orange-500">5+</div>
+          <div class="text-gray-300 mt-2" data-translate="stats_years">سال تجربه</div>
+        </div>
+        <div class="stats-card p-6 rounded-xl text-center">
+          <div class="text-3xl font-bold text-orange-500">2</div>
+          <div class="text-gray-300 mt-2" data-translate="stats_members">اعضای تیم</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- حوزه‌های تحقیقاتی -->
+  <section id="research" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12" data-translate="research_title">حوزه‌های تحقیقاتی</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-atom"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_quantum_title">فیزیک کوانتومی</h3>
+          <p class="text-gray-300" data-translate="research_quantum_description">تحقیقات پیشرفته در زمینه مکانیک کوانتومی، درهم تنیدگی کوانتومی و محاسبات کوانتومی.</p>
+        </div>
+        
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-star"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_cosmic_title">فیزیک هسته‌ای کیهانی</h3>
+          <p class="text-gray-300" data-translate="research_cosmic_description">مطالعه پرتوهای کیهانی و فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها.</p>
+        </div>
+        
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-brain"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_ai_title">هوش مصنوعی در فیزیک</h3>
+          <p class="text-gray-300" data-translate="research_ai_description">کاربردهای یادگیری ماشین و هوش مصنوعی در حل مسائل پیچیده فیزیکی.</p>
+        </div>
+        
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-microchip"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_nano_title">نانوفناوری</h3>
+          <p class="text-gray-300" data-translate="research_nano_description">طراحی و ساخت مواد و دستگاه‌ها در مقیاس نانو برای کاربردهای پیشرفته.</p>
+        </div>
+        
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-wind"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_energy_title">انرژی‌های تجدیدپذیر</h3>
+          <p class="text-gray-300" data-translate="research_energy_description">تحقیقات در زمینه فناوری‌های نوین برای تولید و ذخیره‌سازی انرژی پاک.</p>
+        </div>
+        
+        <div class="research-card p-6 rounded-xl">
+          <div class="text-orange-500 text-3xl mb-4"><i class="fas fa-dna"></i></div>
+          <h3 class="text-xl font-bold text-orange-400 mb-3" data-translate="research_bio_title">فیزیک زیستی</h3>
+          <p class="text-gray-300" data-translate="research_bio_description">کاربرد اصول فیزیک در مطالعه سیستم‌های زیستی و فرآیندهای بیولوژیکی.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- مقالات -->
-  <section id="articles" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
+  <section id="articles" class="py-20 px-6">
     <div class="container mx-auto max-w-6xl">
-      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">مقالات علمی</h2>
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12" data-translate="articles_title">مقالات علمی</h2>
 
       <!-- لیست مقالات -->
       <div id="articles-list">
         <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
-          <h3 class="text-2xl font-bold text-orange-400 mb-4">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
-          <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
-          <p class="text-gray-300">پرتوهای کیهانی ذراتی با انرژی تا \(10^{20}\) eV هستند...</p>
-          <button onclick="showFullArticle(1)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
+          <h3 class="text-2xl font-bold text-orange-400 mb-4" data-translate="articles_article1_title">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3>
+          <p class="text-sm text-gray-400 mb-4" data-translate="articles_article1_author">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p>
+          <p class="text-gray-300" data-translate="articles_article1_summary">پرتوهای کیهانی ذراتی با انرژی تا ۱۰^۲۰ eV هستند که از اعماق فضا به زمین می‌رسند و اطلاعات ارزشمندی درباره فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها ارائه می‌دهند.</p>
+          <button onclick="showFullArticle(1)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium" data-translate="articles_readmore">ادامه مطلب</button>
         </div>
+        
         <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl mb-8">
-          <h3 class="text-2xl font-bold text-orange-400 mb-4">نوترینوها: ذرات شبح‌مانند کیهان</h3>
-          <p class="text-sm text-gray-400 mb-4">نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵</p>
-          <p class="text-gray-300">نوترینوها با ماده به سختی برهم‌کنش می‌کنند...</p>
-          <button onclick="showFullArticle(2)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
+          <h3 class="text-2xl font-bold text-orange-400 mb-4" data-translate="articles_article2_title">نوترینوها: ذرات شبح‌مانند کیهان</h3>
+          <p class="text-sm text-gray-400 mb-4" data-translate="articles_article2_author">نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵</p>
+          <p class="text-gray-300" data-translate="articles_article2_summary">نوترینوها با ماده به سختی برهم‌کنش می‌کنند و می‌توانند از اعماق ستارگان و حتی از دل انفجارهای ابرنواختری عبور کنند و اطلاعات مستقیمی از این پدیده‌ها به ما بدهند.</p>
+          <button onclick="showFullArticle(2)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium" data-translate="articles_readmore">ادامه مطلب</button>
         </div>
+        
         <div class="article-card bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl">
-          <h3 class="text-2xl font-bold text-orange-400 mb-4">شتاب‌دهنده‌های طبیعی کیهان</h3>
-          <p class="text-sm text-gray-400 mb-4">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰</p>
-          <p class="text-gray-300">جهان خود بزرگ‌ترین شتاب‌دهنده است...</p>
-          <button onclick="showFullArticle(3)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium">ادامه مطلب</button>
+          <h3 class="text-2xl font-bold text-orange-400 mb-4" data-translate="articles_article3_title">شتاب‌دهنده‌های طبیعی کیهان</h3>
+          <p class="text-sm text-gray-400 mb-4" data-translate="articles_article3_author">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰</p>
+          <p class="text-gray-300" data-translate="articles_article3_summary">جهان خود بزرگ‌ترین شتاب‌دهنده است. پدیده‌هایی مانند ابرنواخترها، تپ‌اخترها و سیاهچاله‌ها می‌توانند ذرات را تا انرژی‌های باورنکردنی شتاب دهند.</p>
+          <button onclick="showFullArticle(3)" class="mt-4 text-orange-400 hover:text-orange-300 transition font-medium" data-translate="articles_readmore">ادامه مطلب</button>
         </div>
       </div>
 
       <!-- مقاله کامل -->
       <div id="full-article-container" class="hidden mt-12">
-        <button onclick="backToList()" class="mb-6 text-orange-400 hover:text-orange-300 transition font-medium">بازگشت به لیست</button>
+        <button onclick="backToList()" class="mb-6 text-orange-400 hover:text-orange-300 transition font-medium" data-translate="articles_back">بازگشت به لیست</button>
         <div id="full-article-content" class="bg-black/60 backdrop-blur-lg border border-orange-800/50 p-8 rounded-xl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- تیم تحقیقاتی -->
+  <section id="team" class="py-20 px-6 bg-gradient-to-b from-black to-blue-950">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12" data-translate="team_title">تیم تحقیقاتی</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="text-center">
+          <div class="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-r from-orange-500 to-red-500 p-2">
+            <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-5xl font-bold text-orange-500">س</div>
+          </div>
+          <h3 class="text-2xl font-bold text-orange-400">سعدی اسفندیار</h3>
+          <p class="text-gray-300 mt-2" data-translate="team_saadi_role">مدیر علمی</p>
+          <p class="text-sm text-gray-400 mt-1" data-translate="team_saadi_specialty">فیزیک هسته‌ای کیهانی</p>
+          <p class="text-gray-300 mt-4" data-translate="team_saadi_bio">متخصص فیزیک هسته‌ای کیهانی با بیش از ۸ سال تجربه در تحقیقات پیشرفته در زمینه پرتوهای کیهانی و فرآیندهای هسته‌ای ستارگان.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-48 h-48 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-2">
+            <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-5xl font-bold text-blue-500">ی</div>
+          </div>
+          <h3 class="text-2xl font-bold text-orange-400">یاسین امانی</h3>
+          <p class="text-gray-300 mt-2" data-translate="team_yasin_role">هماهنگ‌کننده پروژه‌ها</p>
+          <p class="text-sm text-gray-400 mt-1" data-translate="team_yasin_specialty">فیزیک کوانتومی</p>
+          <p class="text-gray-300 mt-4" data-translate="team_yasin_bio">متخصص فیزیک کوانتومی با تمرکز بر کاربردهای هوش مصنوعی در حل مسائل پیچیده فیزیکی و شبیه‌سازی سیستم‌های کوانتومی.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -163,19 +513,19 @@
   <!-- فضای مجازی -->
   <section id="social" class="py-20 px-6 bg-black/60">
     <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold text-orange-500 glow mb-12">ما در فضای مجازی</h2>
+      <h2 class="text-4xl font-bold text-orange-500 glow mb-12" data-translate="social_title">ما در فضای مجازی</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         <a href="https://rubika.ir/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-          <div class="text-right"><p class="font-bold">روبیکا</p><p class="text-xs opacity-80">Rubika.ir/smarges</p></div>
+          <i class="fab fa-rocketchat text-2xl"></i>
+          <div class="text-right"><p class="font-bold" data-translate="social_rubika">روبیکا</p><p class="text-xs opacity-80">Rubika.ir/smarges</p></div>
         </a>
         <a href="https://eitaa.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-          <div class="text-right"><p class="font-bold">ایتا</p><p class="text-xs opacity-80">Eitaa.com/smarges</p></div>
+          <i class="fas fa-paper-plane text-2xl"></i>
+          <div class="text-right"><p class="font-bold" data-translate="social_eitaa">ایتا</p><p class="text-xs opacity-80">Eitaa.com/smarges</p></div>
         </a>
         <a href="https://instagram.com/smarges" target="_blank" class="flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 to-orange-500 hover:from-pink-600 hover:to-orange-600 text-white py-5 px-6 rounded-xl transition transform hover:scale-105 shadow-lg">
-          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948... (کوتاه شده)</svg>
-          <div class="text-right"><p class="font-bold">اینستاگرام</p><p class="text-xs opacity-80">@smarges</p></div>
+          <i class="fab fa-instagram text-2xl"></i>
+          <div class="text-right"><p class="font-bold" data-translate="social_instagram">اینستاگرام</p><p class="text-xs opacity-80">@smarges</p></div>
         </a>
       </div>
     </div>
@@ -184,12 +534,12 @@
   <!-- ارتباط با ما -->
   <section id="contact" class="py-20 px-6">
     <div class="container mx-auto max-w-2xl">
-      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12">ارتباط با ما</h2>
+      <h2 class="text-4xl font-bold text-center text-orange-500 glow mb-12" data-translate="contact_title">ارتباط با ما</h2>
       <form id="contact-form" class="bg-black/60 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 space-y-6">
-        <input type="text" placeholder="نام شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
-        <input type="email" placeholder="ایمیل شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
-        <textarea placeholder="پیام شما" rows="5" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition"></textarea>
-        <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition transform hover:scale-105">
+        <input type="text" id="contact-name" placeholder="نام شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition" data-translate-placeholder="contact_name">
+        <input type="email" id="contact-email" placeholder="ایمیل شما" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition" data-translate-placeholder="contact_email">
+        <textarea id="contact-message" placeholder="پیام شما" rows="5" required class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition" data-translate-placeholder="contact_message"></textarea>
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition transform hover:scale-105" data-translate="contact_submit">
           ارسال پیام
         </button>
         <p id="form-status" class="text-center text-sm mt-4"></p>
@@ -199,11 +549,11 @@
 
   <!-- فوتر + دکمه پنل مدیریت -->
   <footer class="bg-black/80 py-8 text-center text-sm text-gray-500 border-t border-blue-900">
-    <p>© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است</p>
-    <p class="mt-2">طراحی شده با برای آینده علم</p>
+    <p data-translate="footer_copyright">© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است</p>
+    <p class="mt-2" data-translate="footer_design">طراحی شده برای آینده علم</p>
     
     <!-- دکمه پنل مدیریت -->
-    <button onclick="openAdminPanel()" class="mt-6 px-6 py-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full font-bold transition transform hover:scale-105 admin-btn">
+    <button onclick="openAdminPanel()" class="mt-6 px-6 py-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-full font-bold transition transform hover:scale-105 admin-btn" data-translate="footer_admin">
       پنل مدیریت
     </button>
   </footer>
@@ -212,14 +562,14 @@
   <div id="admin-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-6">
     <div class="bg-black/80 backdrop-blur-lg p-8 rounded-xl border border-orange-700/50 max-w-4xl w-full max-h-screen overflow-y-auto">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-orange-500 glow">پنل مدیریت اسمارجس</h2>
-        <button onclick="closeAdminPanel()" class="text-white text-2xl">بستن</button>
+        <h2 class="text-2xl font-bold text-orange-500 glow" data-translate="admin_title">پنل مدیریت اسمارجس</h2>
+        <button onclick="closeAdminPanel()" class="text-white text-2xl"><i class="fas fa-times"></i></button>
       </div>
 
       <!-- ورود با رمز -->
       <div id="admin-login" class="space-y-4">
-        <input type="password" id="admin-password" placeholder="رمز عبور را وارد کنید" class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition">
-        <button onclick="checkAdminPassword()" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition">
+        <input type="password" id="admin-password" placeholder="رمز عبور را وارد کنید" class="w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg focus:border-orange-500 focus:outline-none transition" data-translate-placeholder="admin_password">
+        <button onclick="checkAdminPassword()" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white rounded-lg font-bold transition" data-translate="admin_submit">
           ورود به پنل
         </button>
         <p id="admin-error" class="text-red-400 text-center text-sm"></p>
@@ -228,17 +578,26 @@
       <!-- پنل اصلی (مخفی) -->
       <div id="admin-dashboard" class="hidden space-y-8">
         <div class="flex space-x-reverse space-x-4 border-b border-orange-800 pb-2">
-          <button onclick="showAdminTab('articles')" class="tab-btn active px-4 py-2">مقالات</button>
-          <button onclick="showAdminTab('social')" class="tab-btn px-4 py-2">فضای مجازی</button>
+          <button onclick="showAdminTab('messages')" class="tab-btn active px-4 py-2" data-translate="admin_messages">پیام‌ها</button>
+          <button onclick="showAdminTab('articles')" class="tab-btn px-4 py-2" data-translate="admin_articles">مقالات</button>
+          <button onclick="showAdminTab('social')" class="tab-btn px-4 py-2" data-translate="admin_social">فضای مجازی</button>
+        </div>
+
+        <!-- مدیریت پیام‌ها -->
+        <div id="admin-messages" class="space-y-6">
+          <h3 class="text-xl font-bold text-orange-400 mb-4" data-translate="admin_messages_title">پیام‌های دریافتی</h3>
+          <div id="messages-list" class="space-y-4 max-h-96 overflow-y-auto p-2">
+            <!-- پیام‌ها اینجا نمایش داده می‌شوند -->
+          </div>
         </div>
 
         <!-- مدیریت مقالات -->
-        <div id="admin-articles" class="space-y-6">
+        <div id="admin-articles" class="hidden space-y-6">
           <div class="bg-black/60 p-6 rounded-xl border border-orange-700/50">
-            <h3 class="text-xl font-bold text-orange-400 mb-4">افزودن مقاله جدید</h3>
-            <input type="text" id="new-title" placeholder="عنوان مقاله" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg">
-            <textarea id="new-content" placeholder="محتوای کامل مقاله (با LaTeX)" rows="6" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg"></textarea>
-            <button onclick="addArticle()" class="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg">افزودن مقاله</button>
+            <h3 class="text-xl font-bold text-orange-400 mb-4" data-translate="admin_add_article">افزودن مقاله جدید</h3>
+            <input type="text" id="new-title" placeholder="عنوان مقاله" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg" data-translate-placeholder="admin_article_title">
+            <textarea id="new-content" placeholder="محتوای کامل مقاله" rows="6" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg" data-translate-placeholder="admin_article_content"></textarea>
+            <button onclick="addArticle()" class="px-6 py-2 bg-green-600 hover:bg-green-700 rounded-lg" data-translate="admin_add_button">افزودن مقاله</button>
           </div>
           <div id="articles-list-admin"></div>
         </div>
@@ -249,7 +608,7 @@
             <input type="text" id="rubika-link" placeholder="لینک روبیکا" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg" value="https://rubika.ir/smarges">
             <input type="text" id="eitaa-link" placeholder="لینک ایتا" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg" value="https://eitaa.com/smarges">
             <input type="text" id="instagram-link" placeholder="لینک اینستاگرام" class="w-full mb-3 px-4 py-2 bg-black/50 border border-gray-700 rounded-lg" value="https://instagram.com/smarges">
-            <button onclick="saveSocialLinks()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg">ذخیره لینک‌ها</button>
+            <button onclick="saveSocialLinks()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg" data-translate="admin_save_links">ذخیره لینک‌ها</button>
           </div>
         </div>
       </div>
@@ -258,6 +617,230 @@
 
   <!-- جاوااسکریپت -->
   <script>
+    // داده‌های چندزبانی کاملاً اصلاح شده
+    const translations = {
+      fa: {
+        // نویگیشن
+        "nav_home": "خانه",
+        "nav_about": "درباره ما",
+        "nav_research": "تحقیقات",
+        "nav_articles": "مقالات",
+        "nav_team": "تیم",
+        "nav_social": "فضای مجازی",
+        "nav_contact": "ارتباط با ما",
+        
+        // صفحه اصلی
+        "home_subtitle": "گروه تحقیقاتی سعدی اسفندیار و یاسین امانی",
+        "home_description": "گروه تحقیقاتی <strong>اسمارجس</strong> در سال ۱۴۰۲ با هدف کشف ناشناخته‌های علم و فناوری تأسیس شد. ما در تمام حوزه‌های علمی فعالیت می‌کنیم، اما <strong>فیزیک هسته‌ای کیهانی</strong> تخصص اصلی ماست.",
+        "home_quote": "«جهان یک آزمایشگاه بزرگ است. ما فقط در حال کشف آن هستیم.»",
+        "home_cta_research": "کشف تحقیقات",
+        "home_cta_articles": "مقالات علمی",
+        
+        // درباره ما
+        "about_title": "درباره اسمارجس",
+        "about_saadi_role": "مدیر علمی",
+        "about_saadi_specialty": "متخصص فیزیک هسته‌ای کیهانی",
+        "about_yasin_role": "هماهنگ‌کننده پروژه‌ها",
+        "about_yasin_specialty": "متخصص فیزیک کوانتومی",
+        "about_description1": "ما در تمام علوم تحقیق می‌کنیم، اما تمرکز اصلی بر <strong>فیزیک هسته‌ای کیهانی</strong> است.",
+        "about_mission": "مأموریت: ترکیب علم، فناوری و خلاقیت برای ساختن آینده‌ای روشن‌تر.",
+        "about_description2": "گروه تحقیقاتی اسمارجس با هدف پیشبرد مرزهای دانش و ارائه راهکارهای نوآورانه برای چالش‌های علمی تأسیس شده است. ما باور داریم که همکاری میان‌رشته‌ای کلید حل مسائل پیچیده در جهان امروز است.",
+        
+        // آمار
+        "stats_projects": "پروژه تحقیقاتی",
+        "stats_publications": "مقاله منتشر شده",
+        "stats_years": "سال تجربه",
+        "stats_members": "اعضای تیم",
+        
+        // تحقیقات
+        "research_title": "حوزه‌های تحقیقاتی",
+        "research_quantum_title": "فیزیک کوانتومی",
+        "research_quantum_description": "تحقیقات پیشرفته در زمینه مکانیک کوانتومی، درهم تنیدگی کوانتومی و محاسبات کوانتومی.",
+        "research_cosmic_title": "فیزیک هسته‌ای کیهانی",
+        "research_cosmic_description": "مطالعه پرتوهای کیهانی و فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها.",
+        "research_ai_title": "هوش مصنوعی در فیزیک",
+        "research_ai_description": "کاربردهای یادگیری ماشین و هوش مصنوعی در حل مسائل پیچیده فیزیکی.",
+        "research_nano_title": "نانوفناوری",
+        "research_nano_description": "طراحی و ساخت مواد و دستگاه‌ها در مقیاس نانو برای کاربردهای پیشرفته.",
+        "research_energy_title": "انرژی‌های تجدیدپذیر",
+        "research_energy_description": "تحقیقات در زمینه فناوری‌های نوین برای تولید و ذخیره‌سازی انرژی پاک.",
+        "research_bio_title": "فیزیک زیستی",
+        "research_bio_description": "کاربرد اصول فیزیک در مطالعه سیستم‌های زیستی و فرآیندهای بیولوژیکی.",
+        
+        // مقالات
+        "articles_title": "مقالات علمی",
+        "articles_article1_title": "پرتوهای کیهانی: پیام‌آوران اعماق فضا",
+        "articles_article1_author": "نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰",
+        "articles_article1_summary": "پرتوهای کیهانی ذراتی با انرژی تا ۱۰^۲۰ eV هستند که از اعماق فضا به زمین می‌رسند و اطلاعات ارزشمندی درباره فرآیندهای هسته‌ای در ستارگان و کهکشان‌ها ارائه می‌دهند.",
+        "articles_article2_title": "نوترینوها: ذرات شبح‌مانند کیهان",
+        "articles_article2_author": "نویسنده: یاسین امانی | تاریخ: ۱۴۰۴/۰۸/۱۵",
+        "articles_article2_summary": "نوترینوها با ماده به سختی برهم‌کنش می‌کنند و می‌توانند از اعماق ستارگان و حتی از دل انفجارهای ابرنواختری عبور کنند و اطلاعات مستقیمی از این پدیده‌ها به ما بدهند.",
+        "articles_article3_title": "شتاب‌دهنده‌های طبیعی کیهان",
+        "articles_article3_author": "نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۱۰",
+        "articles_article3_summary": "جهان خود بزرگ‌ترین شتاب‌دهنده است. پدیده‌هایی مانند ابرنواخترها، تپ‌اخترها و سیاهچاله‌ها می‌توانند ذرات را تا انرژی‌های باورنکردنی شتاب دهند.",
+        "articles_readmore": "ادامه مطلب",
+        "articles_back": "بازگشت به لیست",
+        
+        // تیم
+        "team_title": "تیم تحقیقاتی",
+        "team_saadi_role": "مدیر علمی",
+        "team_saadi_specialty": "فیزیک هسته‌ای کیهانی",
+        "team_saadi_bio": "متخصص فیزیک هسته‌ای کیهانی با بیش از ۸ سال تجربه در تحقیقات پیشرفته در زمینه پرتوهای کیهانی و فرآیندهای هسته‌ای ستارگان.",
+        "team_yasin_role": "هماهنگ‌کننده پروژه‌ها",
+        "team_yasin_specialty": "فیزیک کوانتومی",
+        "team_yasin_bio": "متخصص فیزیک کوانتومی با تمرکز بر کاربردهای هوش مصنوعی در حل مسائل پیچیده فیزیکی و شبیه‌سازی سیستم‌های کوانتومی.",
+        
+        // فضای مجازی
+        "social_title": "ما در فضای مجازی",
+        "social_rubika": "روبیکا",
+        "social_eitaa": "ایتا",
+        "social_instagram": "اینستاگرام",
+        
+        // ارتباط با ما
+        "contact_title": "ارتباط با ما",
+        "contact_name": "نام شما",
+        "contact_email": "ایمیل شما",
+        "contact_message": "پیام شما",
+        "contact_submit": "ارسال پیام",
+        "contact_success": "پیام شما با موفقیت ارسال شد!",
+        
+        // فوتر
+        "footer_copyright": "© ۱۴۰۴ اسمارجس | همه حقوق محفوظ است",
+        "footer_design": "طراحی شده برای آینده علم",
+        "footer_admin": "پنل مدیریت",
+        
+        // پنل مدیریت
+        "admin_title": "پنل مدیریت اسمارجس",
+        "admin_password": "رمز عبور را وارد کنید",
+        "admin_submit": "ورود به پنل",
+        "admin_error": "رمز عبور اشتباه است!",
+        "admin_messages": "پیام‌ها",
+        "admin_articles": "مقالات",
+        "admin_social": "فضای مجازی",
+        "admin_messages_title": "پیام‌های دریافتی",
+        "admin_messages_empty": "هیچ پیامی دریافت نشده است.",
+        "admin_add_article": "افزودن مقاله جدید",
+        "admin_article_title": "عنوان مقاله",
+        "admin_article_content": "محتوای کامل مقاله",
+        "admin_add_button": "افزودن مقاله",
+        "admin_delete": "حذف",
+        "admin_required": "عنوان و محتوا الزامی است",
+        "admin_added": "مقاله اضافه شد!",
+        "admin_save_links": "ذخیره لینک‌ها",
+        "admin_saved": "لینک‌ها ذخیره شد!"
+      },
+      en: {
+        // نویگیشن
+        "nav_home": "Home",
+        "nav_about": "About Us",
+        "nav_research": "Research",
+        "nav_articles": "Articles",
+        "nav_team": "Team",
+        "nav_social": "Social Media",
+        "nav_contact": "Contact Us",
+        
+        // صفحه اصلی
+        "home_subtitle": "Research Group of Saadi Esfandiar and Yasin Emami",
+        "home_description": "The <strong>Smarges</strong> research group was established in 2023 with the aim of discovering the unknowns of science and technology. We work in all scientific fields, but <strong>cosmic nuclear physics</strong> is our main specialty.",
+        "home_quote": "\"The universe is a large laboratory. We are just discovering it.\"",
+        "home_cta_research": "Explore Research",
+        "home_cta_articles": "Scientific Articles",
+        
+        // درباره ما
+        "about_title": "About Smarges",
+        "about_saadi_role": "Scientific Director",
+        "about_saadi_specialty": "Cosmic Nuclear Physics Specialist",
+        "about_yasin_role": "Project Coordinator",
+        "about_yasin_specialty": "Quantum Physics Specialist",
+        "about_description1": "We research in all sciences, but our main focus is on <strong>cosmic nuclear physics</strong>.",
+        "about_mission": "Mission: Combining science, technology and creativity to build a brighter future.",
+        "about_description2": "The Smarges research group was established with the aim of advancing the frontiers of knowledge and providing innovative solutions to scientific challenges. We believe that interdisciplinary collaboration is the key to solving complex problems in today's world.",
+        
+        // آمار
+        "stats_projects": "Research Projects",
+        "stats_publications": "Published Papers",
+        "stats_years": "Years of Experience",
+        "stats_members": "Team Members",
+        
+        // تحقیقات
+        "research_title": "Research Areas",
+        "research_quantum_title": "Quantum Physics",
+        "research_quantum_description": "Advanced research in quantum mechanics, quantum entanglement and quantum computing.",
+        "research_cosmic_title": "Cosmic Nuclear Physics",
+        "research_cosmic_description": "Study of cosmic rays and nuclear processes in stars and galaxies.",
+        "research_ai_title": "AI in Physics",
+        "research_ai_description": "Applications of machine learning and artificial intelligence in solving complex physical problems.",
+        "research_nano_title": "Nanotechnology",
+        "research_nano_description": "Design and fabrication of materials and devices at the nanoscale for advanced applications.",
+        "research_energy_title": "Renewable Energy",
+        "research_energy_description": "Research on novel technologies for clean energy production and storage.",
+        "research_bio_title": "Biophysics",
+        "research_bio_description": "Application of physics principles in the study of biological systems and processes.",
+        
+        // مقالات
+        "articles_title": "Scientific Articles",
+        "articles_article1_title": "Cosmic Rays: Messengers from the Depths of Space",
+        "articles_article1_author": "Author: Saadi Esfandiar | Date: 2025/11/10",
+        "articles_article1_summary": "Cosmic rays are particles with energies up to 10^20 eV that reach Earth from deep space and provide valuable information about nuclear processes in stars and galaxies.",
+        "articles_article2_title": "Neutrinos: Ghost-like Particles of the Cosmos",
+        "articles_article2_author": "Author: Yasin Emami | Date: 2025/11/05",
+        "articles_article2_summary": "Neutrinos interact very weakly with matter and can pass through the depths of stars and even through supernova explosions, giving us direct information about these phenomena.",
+        "articles_article3_title": "Natural Accelerators of the Cosmos",
+        "articles_article3_author": "Author: Saadi Esfandiar | Date: 2025/10/31",
+        "articles_article3_summary": "The universe itself is the largest accelerator. Phenomena such as supernovae, pulsars and black holes can accelerate particles to incredible energies.",
+        "articles_readmore": "Read More",
+        "articles_back": "Back to List",
+        
+        // تیم
+        "team_title": "Research Team",
+        "team_saadi_role": "Scientific Director",
+        "team_saadi_specialty": "Cosmic Nuclear Physics",
+        "team_saadi_bio": "Specialist in cosmic nuclear physics with over 8 years of experience in advanced research on cosmic rays and nuclear processes in stars.",
+        "team_yasin_role": "Project Coordinator",
+        "team_yasin_specialty": "Quantum Physics",
+        "team_yasin_bio": "Specialist in quantum physics with a focus on applications of artificial intelligence in solving complex physical problems and simulating quantum systems.",
+        
+        // فضای مجازی
+        "social_title": "We're on Social Media",
+        "social_rubika": "Rubika",
+        "social_eitaa": "Eitaa",
+        "social_instagram": "Instagram",
+        
+        // ارتباط با ما
+        "contact_title": "Contact Us",
+        "contact_name": "Your Name",
+        "contact_email": "Your Email",
+        "contact_message": "Your Message",
+        "contact_submit": "Send Message",
+        "contact_success": "Your message has been sent successfully!",
+        
+        // فوتر
+        "footer_copyright": "© 2025 Smarges | All Rights Reserved",
+        "footer_design": "Designed for the Future of Science",
+        "footer_admin": "Admin Panel",
+        
+        // پنل مدیریت
+        "admin_title": "Smarges Admin Panel",
+        "admin_password": "Enter password",
+        "admin_submit": "Login to Panel",
+        "admin_error": "Incorrect password!",
+        "admin_messages": "Messages",
+        "admin_articles": "Articles",
+        "admin_social": "Social Media",
+        "admin_messages_title": "Received Messages",
+        "admin_messages_empty": "No messages received yet.",
+        "admin_add_article": "Add New Article",
+        "admin_article_title": "Article Title",
+        "admin_article_content": "Full article content",
+        "admin_add_button": "Add Article",
+        "admin_delete": "Delete",
+        "admin_required": "Title and content are required",
+        "admin_added": "Article added!",
+        "admin_save_links": "Save Links",
+        "admin_saved": "Links saved!"
+      }
+    };
+
     // منوی موبایل
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -289,10 +872,33 @@
     // فرم تماس
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+      
+      // ذخیره پیام در localStorage
+      const messages = JSON.parse(localStorage.getItem('smarges_messages') || '[]');
+      const newMessage = {
+        id: Date.now(),
+        name: name,
+        email: email,
+        message: message,
+        date: new Date().toLocaleDateString(currentLang === 'fa' ? 'fa-IR' : 'en-US'),
+        read: false
+      };
+      
+      messages.unshift(newMessage);
+      localStorage.setItem('smarges_messages', JSON.stringify(messages));
+      
       const status = document.getElementById('form-status');
-      status.textContent = 'پیام شما با موفقیت ارسال شد!';
-      status.className = 'text-green-400';
-      setTimeout(() => { status.textContent = ''; this.reset(); }, 3000);
+      status.textContent = translations[currentLang]['contact_success'];
+      status.className = 'text-green-400 text-center text-sm mt-4';
+      
+      setTimeout(() => { 
+        status.textContent = ''; 
+        this.reset(); 
+      }, 3000);
     });
 
     // نمایش مقاله کامل
@@ -301,9 +907,43 @@
       const content = document.getElementById('full-article-content');
       const list = document.getElementById('articles-list');
       let html = '';
-      if (id === 1) {
-        html = `<h3 class="text-2xl font-bold text-orange-400 mb-6">پرتوهای کیهانی: پیام‌آوران اعماق فضا</h3><p class="text-sm text-gray-400 mb-6">نویسنده: سعدی اسفندیار | تاریخ: ۱۴۰۴/۰۸/۲۰</p><div class="prose prose-invert text-gray-300 space-y-4"><p>پرتوهای کیهانی ذراتی با انرژی بسیار بالا هستند...</p><p class="text-center">\\[\frac{dN}{dE} \propto E^{-2.7}\\]</p><div class="chart">نمودار: طیف انرژی</div><p>منبع: Pierre Auger, 2023</p></div>`;
-      }
+      
+      const articleTitles = {
+        fa: [
+          "پرتوهای کیهانی: پیام‌آوران اعماق فضا",
+          "نوترینوها: ذرات شبح‌مانند کیهان", 
+          "شتاب‌دهنده‌های طبیعی کیهان"
+        ],
+        en: [
+          "Cosmic Rays: Messengers from the Depths of Space",
+          "Neutrinos: Ghost-like Particles of the Cosmos",
+          "Natural Accelerators of the Cosmos"
+        ]
+      };
+      
+      const articleContent = {
+        fa: [
+          "<p>پرتوهای کیهانی ذراتی با انرژی بسیار بالا هستند که از اعماق فضا به زمین می‌رسند...</p>",
+          "<p>نوترینوها با ماده به سختی برهم‌کنش می‌کنند و می‌توانند از اعماق ستارگان عبور کنند...</p>",
+          "<p>جهان خود بزرگ‌ترین شتاب‌دهنده است. پدیده‌هایی مانند ابرنواخترها می‌توانند ذرات را شتاب دهند...</p>"
+        ],
+        en: [
+          "<p>Cosmic rays are high-energy particles that reach Earth from deep space...</p>",
+          "<p>Neutrinos interact very weakly with matter and can pass through the depths of stars...</p>",
+          "<p>The universe itself is the largest accelerator. Phenomena such as supernovae can accelerate particles...</p>"
+        ]
+      };
+      
+      html = `
+        <h3 class="text-2xl font-bold text-orange-400 mb-6">${articleTitles[currentLang][id-1]}</h3>
+        <p class="text-sm text-gray-400 mb-6">${translations[currentLang][`articles_article${id}_author`]}</p>
+        <div class="prose prose-invert text-gray-300 space-y-4">
+          ${articleContent[currentLang][id-1]}
+          <div class="chart">${currentLang === 'fa' ? 'نمودار: طیف انرژی' : 'Chart: Energy Spectrum'}</div>
+          <p>${currentLang === 'fa' ? 'منبع' : 'Source'}: Pierre Auger, 2023</p>
+        </div>
+      `;
+      
       content.innerHTML = html;
       list.classList.add('hidden');
       container.classList.remove('hidden');
@@ -315,8 +955,66 @@
       document.getElementById('full-article-container').classList.add('hidden');
     }
 
+    // تغییر زبان
+    let currentLang = 'fa';
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentLang = this.getAttribute('data-lang');
+        
+        // تغییر جهت متن
+        if (currentLang === 'fa') {
+          document.body.classList.remove('ltr');
+          document.body.classList.add('rtl');
+          document.documentElement.dir = 'rtl';
+          document.documentElement.lang = 'fa';
+        } else {
+          document.body.classList.remove('rtl');
+          document.body.classList.add('ltr');
+          document.documentElement.dir = 'ltr';
+          document.documentElement.lang = 'en';
+        }
+        
+        // تغییر لوگو و عنوان
+        document.getElementById('logo-text').textContent = currentLang === 'fa' ? 'اسمارجس' : 'Smarges';
+        document.getElementById('main-title').textContent = currentLang === 'fa' ? 'اسمارجس' : 'Smarges';
+        document.title = currentLang === 'fa' ? 'اسمارجس | Smarges' : 'Smarges | اسمارجس';
+        
+        updateContent();
+      });
+    });
+
+    // تغییر تم
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const theme = this.getAttribute('data-theme');
+        document.body.className = `${theme}-mode smooth-scroll ${currentLang === 'fa' ? 'rtl' : 'ltr'}`;
+      });
+    });
+
+    // به‌روزرسانی محتوا بر اساس زبان
+    function updateContent() {
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          element.innerHTML = translations[currentLang][key];
+        }
+      });
+      
+      document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-translate-placeholder');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          element.placeholder = translations[currentLang][key];
+        }
+      });
+    }
+
     // پنل مدیریت
-    const ADMIN_PASSWORD = 'smargessaadiandyasin';
+    const ADMIN_PASSWORD = 'smarges';
 
     function openAdminPanel() {
       document.getElementById('admin-modal').classList.remove('hidden');
@@ -336,39 +1034,63 @@
         document.getElementById('admin-dashboard').classList.remove('hidden');
         loadAdminData();
       } else {
-        error.textContent = 'رمز عبور اشتباه است!';
+        error.textContent = translations[currentLang]['admin_error'];
       }
     }
 
     function showAdminTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
+      document.getElementById('admin-messages').classList.add('hidden');
       document.getElementById('admin-articles').classList.add('hidden');
       document.getElementById('admin-social').classList.add('hidden');
       document.getElementById(`admin-${tab}`).classList.remove('hidden');
     }
 
     function loadAdminData() {
+      // بارگذاری پیام‌ها از localStorage
+      const messages = JSON.parse(localStorage.getItem('smarges_messages') || '[]');
+      const messagesList = document.getElementById('messages-list');
+      
+      if (messages.length === 0) {
+        messagesList.innerHTML = `<p class="text-gray-400 text-center">${translations[currentLang]['admin_messages_empty']}</p>`;
+      } else {
+        messagesList.innerHTML = '';
+        messages.forEach(msg => {
+          const messageItem = document.createElement('div');
+          messageItem.className = 'message-item';
+          messageItem.innerHTML = `
+            <div class="message-header">
+              <span class="message-name">${msg.name}</span>
+              <span class="message-date">${msg.date}</span>
+            </div>
+            <div class="message-email text-sm text-blue-300 mb-2">${msg.email}</div>
+            <div class="message-content">${msg.message}</div>
+          `;
+          messagesList.appendChild(messageItem);
+        });
+      }
+      
       // بارگذاری مقالات از localStorage
       const articles = JSON.parse(localStorage.getItem('smarges_articles') || '[]');
       const list = document.getElementById('articles-list-admin');
       list.innerHTML = '';
       articles.forEach((art, i) => {
-        list.innerHTML += `<div class="bg-black/60 p-4 rounded-lg mb-3"><p class="font-bold">${art.title}</p><button onclick="deleteArticle(${i})" class="text-red-400 text-sm">حذف</button></div>`;
+        list.innerHTML += `<div class="bg-black/60 p-4 rounded-lg mb-3"><p class="font-bold">${art.title}</p><button onclick="deleteArticle(${i})" class="text-red-400 text-sm">${translations[currentLang]['admin_delete']}</button></div>`;
       });
     }
 
     function addArticle() {
       const title = document.getElementById('new-title').value;
       const content = document.getElementById('new-content').value;
-      if (!title || !content) return alert('عنوان و محتوا الزامی است');
+      if (!title || !content) return alert(translations[currentLang]['admin_required']);
       const articles = JSON.parse(localStorage.getItem('smarges_articles') || '[]');
       articles.push({ title, content });
       localStorage.setItem('smarges_articles', JSON.stringify(articles));
       document.getElementById('new-title').value = '';
       document.getElementById('new-content').value = '';
       loadAdminData();
-      alert('مقاله اضافه شد!');
+      alert(translations[currentLang]['admin_added']);
     }
 
     function deleteArticle(index) {
@@ -385,8 +1107,11 @@
         instagram: document.getElementById('instagram-link').value
       };
       localStorage.setItem('smarges_social', JSON.stringify(links));
-      alert('لینک‌ها ذخیره شد!');
+      alert(translations[currentLang]['admin_saved']);
     }
+
+    // بارگذاری اولیه محتوا
+    updateContent();
   </script>
 </body>
 </html>
